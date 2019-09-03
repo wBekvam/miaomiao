@@ -21,15 +21,6 @@
                         <p>2018-11-16</p>
                     </div>
                 </li> -->
-                <li v-for="item in moviesList" :key="item.id">
-                    <div class="img"> <img :src="item.img | setWH('128.180') "></div>
-                    <div class="info">
-                        <p><span>{{ item.nm }}</span><span>{{ item.sc }}</span></p>
-                        <p> {{ item.enm }} </p>
-                        <p>{{ item.cat}}</p>
-                        <p>{{ item.rt }}</p>
-                    </div>
-                </li>
             </ul>
         </div>
     </div>
@@ -38,45 +29,25 @@
 
 
 <script>
-import { setTimeout } from 'timers';
+import { monitorEventLoopDelay } from 'perf_hooks';
 
 
 
 export default {
     name: 'Search',
-    data() {
+    data(){
         return{
             message: '',
             moviesList: []
         }
     },
-    methods: {
-        cancelRequest(){
-            if(typeof this.source === 'function'){
-                this.source('终止请求')
-            }
-        }
-    },
     watch: {
         message(newVal){
-            const that = this
-            this.cancelRequest()
-            
-            this.axios.get('/api/searchList?cityId=10&kw='+newVal,{
-                cancelToken: new this.axios.CancelToken(function(c) {
-                    that.source = c
-                })
-            }).then((res) => {
+            this.axios.get('api/searchList?cityId=10&kw='+newVal).then((res) => {
                 const msg = res.data.msg
                 const movies = res.data.data.movies
                 if(msg && movies){
-                    this.moviesList = res.data.data.movies.list
-                }
-            }).catch((err) => {
-                if(this.axios.isCancel(err)) {
-                    console.log('Request canceled', err.message) //请求如果被取消，这里是返回取消的message
-                }else {
-                    console.log(err)
+                    this.moviesList = res.res.data.data.movies.moviesList
                 }
             })
         }

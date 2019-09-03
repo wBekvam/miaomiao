@@ -71,10 +71,10 @@ export default {
         },
          classCard(key){
             const card = [
-                { key: 'allowRefund', value: 'bl'},
-                { key: 'endorse', value: 'bl'},
-                { key: 'sell', value: 'or'},
-                { key: 'snack', value: 'or'}
+                { key: 'allowRefund', value: 'or'},
+                { key: 'endorse', value: 'or'},
+                { key: 'sell', value: 'bl'},
+                { key: 'snack', value: 'bl'}
 
             ]
             for(var i=0; i<card.length; i++){

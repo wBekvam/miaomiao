@@ -51,7 +51,7 @@
         </div>
         <div class="city_index">
             <ul>
-                <li v-for="(item, index) in cityList" :key="item.index" @touchstart="handleToIndex(index)">{{ item.index }}</li>
+                <li v-for="(item,index) in cityList" :key="item.index" @touchstart="handleToIndex(index)">{{ item.index }}</li>
             </ul>
         </div>
     </div>

@@ -32,6 +32,8 @@
 
 <script>
 
+
+
 export default {
     name: 'ComingSoon',
     data(){
@@ -41,7 +43,7 @@ export default {
     },
     mounted(){
         this.axios.get('/api/movieComingList?cityId=10').then((res) => {
-            const msg = res.data.msg
+            const msg = res.data.data.msg
             if(msg === 'ok'){
                 this.comingList = res.data.data.comingList
             }

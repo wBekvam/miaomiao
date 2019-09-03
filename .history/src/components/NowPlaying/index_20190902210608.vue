@@ -5,25 +5,26 @@
                 <div class="pic_show"><img src="/images/movie_1.jpg"></div>
                 <div class="info_list">
                     <h2>无名之辈</h2>
-                    <p><span class="person">17746</span> 人想看</p>
+                    <p>观众评 <span class="grade">9.2</span></p>
                     <p>主演: 陈建斌,任素汐,潘斌龙</p>
-                    <p>2018-11-30上映</p>
+                    <p>今天55家影院放映607场</p>
                 </div>
-                <div class="btn_pre">
-                    预售
+                <div class="btn_mall">
+                    购票
                 </div>
             </li> -->
-            <li v-for="item in comingList" :key="item.id">
+            <li v-for="item in movieList" :key="item.id">               
                 <div class="pic_show"><img :src="item.img | setWH('128.180')"></div>
                 <div class="info_list">
-                    <h2>{{ item.nm }} <img v-if="item.version" src="@/assets/maxs.png" alt=""> </h2>
-                    <p><span class="person">{{ item.wish}}</span> 人想看</p>
-                    <p>{{ item.star}}</p>
-                    <p>{{ item.rt}}上映</p>
+                    <h2>{{ item.nm }} <img v-if="item.version" ></h2>
+                    <p>观众评 <span class="grade">{{ item.sc }} </span></p>
+                    <p>{{ item.star }}</p>
+                    <p>{{ item.showInfo }}</p>
                 </div>
-                <div class="btn_pre">
-                    预售
+                <div class="btn_mall">
+                    购票
                 </div>
+                
             </li>
         </ul>
     </div>
@@ -32,22 +33,22 @@
 
 <script>
 
+
 export default {
-    name: 'ComingSoon',
+    name: 'NowPlaying', 
     data(){
-       return{
-            comingList: []
-       }
+        return {
+            movieList: []
+        }
     },
     mounted(){
-        this.axios.get('/api/movieComingList?cityId=10').then((res) => {
+        this.axios.get('/api/movieOnInfoList?cityId=10').then((res) => {
             const msg = res.data.msg
-            if(msg === 'ok'){
-                this.comingList = res.data.data.comingList
+            if( msg === 'ok' ){
+                this.movieList = res.data.data.movieList
             }
         })
-    }
-   
+    }   
 }
 </script>
 

@@ -59,11 +59,10 @@ export default {
     },
     watch: {
         message(newVal){
-            const that = this
             this.cancelRequest()
             
             this.axios.get('/api/searchList?cityId=10&kw='+newVal,{
-                cancelToken: new this.axios.CancelToken(function(c) {
+                cancelToken: this.axios.cancelToken(function executor(c) {
                     that.source = c
                 })
             }).then((res) => {

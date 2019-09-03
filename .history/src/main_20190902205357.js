@@ -8,7 +8,7 @@ Vue.prototype.axios = axios;
 
 /* 全局过滤器
 * 由于后端提供的URL需要动态的设置图片大小
-* "img": "http://p1.meituan.net/w.h/movie/e5aae93570200e19c8124e5e34dfc13f4475571.jpg"
+*"img": "http://p1.meituan.net/w.h/movie/e5aae93570200e19c8124e5e34dfc13f4475571.jpg"
 * arg 表示传入的参数
 */
 Vue.filter('setWH', (url, arg) => {

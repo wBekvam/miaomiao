@@ -16,7 +16,7 @@
             <li v-for="item in comingList" :key="item.id">
                 <div class="pic_show"><img :src="item.img | setWH('128.180')"></div>
                 <div class="info_list">
-                    <h2>{{ item.nm }} <img v-if="item.version" src="@/assets/maxs.png" alt=""> </h2>
+                    <h2>{{ item.nm }} <img v-if="item.version" src="@/asset/maxs.png" alt=""> </h2>
                     <p><span class="person">{{ item.wish}}</span> 人想看</p>
                     <p>{{ item.star}}</p>
                     <p>{{ item.rt}}上映</p>
@@ -32,6 +32,8 @@
 
 <script>
 
+
+
 export default {
     name: 'ComingSoon',
     data(){
@@ -41,7 +43,7 @@ export default {
     },
     mounted(){
         this.axios.get('/api/movieComingList?cityId=10').then((res) => {
-            const msg = res.data.msg
+            const msg = res.data.data.msg
             if(msg === 'ok'){
                 this.comingList = res.data.data.comingList
             }

@@ -25,12 +25,13 @@
                     <span>{{ item.distance}}km</span>
                 </div>
                 <div class="card">
-                    <!-- vue 不建议v-for v-if一起使用 -->
-                    <div v-for="(num, key) in item.tag" v-if="num === 1" :key="key" :class="key | classCard">
-                        {{ key | formatCard}}
+                    // vue 不建议v-for v-if一起使用
+                    <div v-for="(num, key) in item.tag" v-if="num === 1" :key="key">
+                        {{ key }}
                     </div>
                 </div>
-            </li>      
+            </li>
+            
         </ul>
     </div>
 </template>
@@ -60,21 +61,6 @@ export default {
                 { key: 'endorse', value: '退'},
                 { key: 'sell', value: '折扣卡'},
                 { key: 'snack', value: '小吃'}
-
-            ]
-            for(var i=0; i<card.length; i++){
-                if(card[i].key === key){
-                    return card[i].value
-                }
-            }
-            return ''
-        },
-         classCard(key){
-            const card = [
-                { key: 'allowRefund', value: 'bl'},
-                { key: 'endorse', value: 'bl'},
-                { key: 'sell', value: 'or'},
-                { key: 'snack', value: 'or'}
 
             ]
             for(var i=0; i<card.length; i++){

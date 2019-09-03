@@ -38,7 +38,6 @@
 
 
 <script>
-import { setTimeout } from 'timers';
 
 
 
@@ -50,33 +49,13 @@ export default {
             moviesList: []
         }
     },
-    methods: {
-        cancelRequest(){
-            if(typeof this.source === 'function'){
-                this.source('终止请求')
-            }
-        }
-    },
     watch: {
         message(newVal){
-            const that = this
-            this.cancelRequest()
-            
-            this.axios.get('/api/searchList?cityId=10&kw='+newVal,{
-                cancelToken: new this.axios.CancelToken(function(c) {
-                    that.source = c
-                })
-            }).then((res) => {
+            this.axios.get('/api/searchList?cityId=10&kw='+newVal).then((res) => {
                 const msg = res.data.msg
                 const movies = res.data.data.movies
                 if(msg && movies){
                     this.moviesList = res.data.data.movies.list
-                }
-            }).catch((err) => {
-                if(this.axios.isCancel(err)) {
-                    console.log('Request canceled', err.message) //请求如果被取消，这里是返回取消的message
-                }else {
-                    console.log(err)
                 }
             })
         }

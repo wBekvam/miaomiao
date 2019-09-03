@@ -32,6 +32,8 @@
 
 <script>
 
+
+
 export default {
     name: 'ComingSoon',
     data(){

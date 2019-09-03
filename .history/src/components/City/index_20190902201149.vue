@@ -51,7 +51,7 @@
         </div>
         <div class="city_index">
             <ul>
-                <li v-for="(item, index) in cityList" :key="item.index" @touchstart="handleToIndex(index)">{{ item.index }}</li>
+                <li v-for="(item,index) in cityList" :key="item.index" @touchstart="handleToIndex(index)">{{ item.index }}</li>
             </ul>
         </div>
     </div>
@@ -85,8 +85,8 @@ export default {
                     var cities = res.data.data.cities
                     //[ { index : 'A' , list : [{ nm : '阿城' , id : 123 }] } ]
                     var { cityList , hotList } = this.formatCityList(cities)
-                    this.cityList = cityList
-                    this.hotList = hotList
+                    this.cityList = cityList;
+                    this.hotList = hotList;
                     window.localStorage.setItem('cityList' , JSON.stringify(cityList))
                     window.localStorage.setItem('hotList' , JSON.stringify(hotList))
                 }
@@ -97,8 +97,7 @@ export default {
         formatCityList(cities){
             var cityList = []
             var hotList = []
-            
-            // 查询热门城市
+
             for(var i=0;i<cities.length;i++){
                 if(cities[i].isHot === 1){
                     hotList.push( cities[i] )
@@ -106,9 +105,7 @@ export default {
             }
 
             for(var i=0;i<cities.length;i++){
-                // 获取第一个字母
                 var firstLetter = cities[i].py.substring(0,1).toUpperCase()
-                // substring() :字符串的截取
                 if(toCom(firstLetter)){  //新添加index
                     cityList.push({ index : firstLetter , list : [ { nm : cities[i].nm , id : cities[i].id } ] });
                 }
@@ -121,7 +118,6 @@ export default {
                 }
             }
 
-            // 城市排序
             cityList.sort((n1,n2)=>{
                 if( n1.index > n2.index ){
                     return 1
@@ -151,7 +147,6 @@ export default {
             };
 
         },
-        // 首字母跳转
         handleToIndex(index){
             var h2 = this.$refs.city_sort.getElementsByTagName('h2')
             //this.$refs.city_sort.parentNode.scrollTop = h2[index].offsetTop;
